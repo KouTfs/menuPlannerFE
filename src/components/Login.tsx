@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
 import axios from 'axios';
+import APICommunicator from './APICommunicator';
 
 export const Login = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState<string>();
     const [password, setPassword] = useState<string>();
+    const communicator = new APICommunicator;
 
     type User = {
         userName : string,
@@ -15,10 +17,10 @@ export const Login = () => {
     const loginUrl = "http://localhost:5000/login"
 
     const onClickLogin = async () => {
-         await axios.post(loginUrl, {
-            userName,
-            password
-         }).then((response)=>{
+        communicator.login({
+          userName,
+          password
+       }).then((response)=>{
           sessionStorage.setItem('AUTHORITY', response.data);
           navigate('/app')
         }).catch((error) => {navigate("/fail_login")});

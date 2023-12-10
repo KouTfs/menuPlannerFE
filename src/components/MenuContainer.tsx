@@ -1,8 +1,12 @@
 import React from 'react'
 import Menu from './entity/Menu'
+import MenuCard from './MenuCard'
+import { Grid } from '@mui/material'
+import Ingredient from './entity/Ingredient'
 
 interface props {
     menus : Menu[]
+    ingredients : Ingredient[]
 }
 
 
@@ -13,13 +17,9 @@ const MenuContainer = (props : props) => {
   return (
     <>
         MenuContainer
-        <ul>
-            {props.menus.map((menu) => (
-              <li
-                key={menu.id}
-              >{`[id]=${menu.id} [name]=${menu.name} [type]=${menu.type}`}</li>
-            ))}
-          </ul>
+        <Grid container direction={'column'}>
+            {props.menus.map((menu) => <MenuCard menu={menu} ingredients={props.ingredients}/>)}
+        </Grid>
     </>
   )
 }

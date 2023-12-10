@@ -1,19 +1,18 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import APICommunicator from './APICommunicator';
 
 const Home = () => {
     const navigate = useNavigate();
-    const authCheckUrl = 'http://localhost:5000/menus'
+    const communicator = new APICommunicator;
 
     const checkToken = async () => {
         const token = sessionStorage.getItem('AUTHORITY');
         if(token == null){
             navigate('/login')
         }else{
-            axios.get(authCheckUrl, {
-                headers: {Authorization: token}
-            }).then(()=>navigate('/app')).catch(()=>{navigate('/login')})
+            communicator.checkAuth(token).then(()=>navigate('/app')).catch(()=>{navigate('/login')});
         }
     }
   return (
