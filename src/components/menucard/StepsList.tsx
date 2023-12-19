@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Ingredient from './entity/Ingredient'
+import Ingredient from '../entity/Ingredient'
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Autocomplete, Button, IconButton, ListItem, ListItemButton, ListItemText, TextField } from '@mui/material'
-import Step from './entity/Step'
+import Step from '../entity/Step'
 
 interface props {
     steps : Step[]
@@ -29,13 +29,16 @@ const StepsList = (props : props) => {
 
     const onCreateClick = () => {
         setAddFlg(true);
+        pushNewStep();
+    }
+
+    const pushNewStep = () => {
         if(newStep){
             const updStepList = [...props.steps];
             updStepList.push({stepNo: 0, description : newStep})
+            setAddFlg(false);
             props.setSteps(updStepList)
             setNewStep('');
-        }else{
-            console.log('error');
         }
     }
 
@@ -66,6 +69,7 @@ const StepsList = (props : props) => {
                             variant="outlined"
                             value={newStep}
                             onChange={(e)=>setNewStep(e.target.value)}
+                            onBlur={pushNewStep}
                         />
                     </ListItem>
                 }

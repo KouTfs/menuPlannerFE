@@ -2,7 +2,7 @@ import Ingredient from "./Ingredient";
 import Step from "./Step";
 
 type Recipe = {
-    id: number,
+    id: number | null,
     description : string,
     steps : Step[],
     ingredients : Ingredient[],

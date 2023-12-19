@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Ingredient from './entity/Ingredient'
+import Ingredient from '../entity/Ingredient'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { Autocomplete, Button, IconButton, ListItem, ListItemButton, ListItemText, TextField } from '@mui/material'
@@ -22,10 +22,6 @@ const IngredientsList = (props : props) => {
     useEffect(()=>{
         setAmounts(Array.from(props.ingredients.map((item)=>item.amount)));
     }, [props.ingredients]);
-
-    useEffect(()=>{
-        setAddFlg(true);
-    }, [newIngredient])
 
     const onAmountChange = (index : number) => (event : any) => {
         const updAmountList = [...amounts];
@@ -103,6 +99,7 @@ const IngredientsList = (props : props) => {
                           renderInput={(params) => <TextField {...params} label="材料" />}
                           value={newIngredient?.name}
                           onChange={onNewIngredientChange}
+                          defaultValue={''}
                           inputValue={newIngredientInput}
                           onInputChange={(event, newInputValue) => {
                             setNewIngredientInput(newInputValue);

@@ -39,7 +39,7 @@ export const AppContainer = () => {
               >{`[id]=${ingredient.id} [name]=${ingredient.name} [type]=${ingredient.type}`}</li>
             ))}
           </ul>
-          <MenuContainer menus={menus} ingredients={ingredients}/>
+          <MenuContainer menus={menus} setMenus={setMenus} ingredients={ingredients}/>
         </>
       )
             }
