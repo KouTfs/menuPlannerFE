@@ -30,8 +30,18 @@ class APICommunicator {
     }
 
     getIngredientsById = async (id: number) : Promise<AxiosResponse<Ingredient>> => {
-        const URL = this.host + `/ingredients/${id}`
+        const URL = this.host + `/ingredients/${id}`;
         return await axios.get(URL, {headers: {Authorization: this.getToken()}});
+    }
+
+    postIngredient = async (name: string, type: string) => {
+        const URL = this.host + `/ingredients`;
+        await axios.post(URL, {ingredientName: name, ingredientType: type}, {headers: {Authorization: this.getToken()}})
+    }
+
+    patchIngredient =async (id: number, name: string, type: string) => {
+        const URL = this.host + `/ingredients/${id}`;
+        await axios.patch(URL, {ingredientName: name, ingredientType: type}, {headers: {Authorization: this.getToken()}})
     }
 
     getAllMenus = async (): Promise<AxiosResponse<Menu[]>> => {

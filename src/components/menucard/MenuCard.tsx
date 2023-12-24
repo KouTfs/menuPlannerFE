@@ -160,7 +160,7 @@ const MenuCard = (props : props) => {
           <Button onClick={handleMenuDeleteClick}>削除</Button>
           <Button onClick={handleMenuPatchClick}>更新</Button>
         </CardContent>
-        <MenuModal setMenus={props.setMenus} open={modalOpen} setOpen={setModalOpen} menuId={props.menu.id} />
+        <MenuModal setMenus={props.setMenus} open={modalOpen} setOpen={setModalOpen} menu={props.menu} />
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

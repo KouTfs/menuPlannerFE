@@ -5,6 +5,7 @@ import Menu from './entity/Menu';
 import MenuContainer from './MenuContainer';
 import APICommunicator from './APICommunicator';
 import { CircularProgress } from '@mui/material';
+import IngredientContainer from '../IngredientContainer';
 
 export const AppContainer = () => {
   const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);
@@ -32,17 +33,11 @@ export const AppContainer = () => {
   {!loadingFlg &&
       (
         <>
-          <ul>
-            {ingredients.map((ingredient) => (
-              <li
-                key={ingredient.id}
-              >{`[id]=${ingredient.id} [name]=${ingredient.name} [type]=${ingredient.type}`}</li>
-            ))}
-          </ul>
+          <IngredientContainer ingredients={ingredients} setIngredients={setIngredients}/>
           <MenuContainer menus={menus} setMenus={setMenus} ingredients={ingredients}/>
         </>
       )
-            }
+  }
   </>);
 }
 

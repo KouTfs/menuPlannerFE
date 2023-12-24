@@ -4,10 +4,10 @@ import Menu from '../entity/Menu';
 import APICommunicator from '../APICommunicator';
 
 interface props {
+    menu : Menu | null,
     setMenus: React.Dispatch<React.SetStateAction<Menu[]>>,
     open : boolean,
     setOpen : React.Dispatch<React.SetStateAction<boolean>>,
-    menuId : number | null
 }
 
 const style = {
@@ -24,8 +24,8 @@ const style = {
 
 const MenuModal = (props : props) => {
     const menuTypeList = ['STAPLE', 'MAIN', 'SUB'] // API取得する形もありかも
-    const [newMenuName, setNewMenuName] = React.useState<string>('');
-    const [newMenuType, setNewMenuType] = React.useState<string>('');
+    const [newMenuName, setNewMenuName] = React.useState<string>(props.menu?.name || '');
+    const [newMenuType, setNewMenuType] = React.useState<string>(props.menu?.type || '');
     const communicator = new APICommunicator();
 
     
@@ -44,7 +44,7 @@ const MenuModal = (props : props) => {
 
     const onPatchSubmitClick = async () => {
         if(newMenuName && newMenuType){
-          await communicator.patchMenu({id : props.menuId!, name : newMenuName, type: newMenuType}).then(onCancelClick);
+          await communicator.patchMenu({id : props.menu!.id, name : newMenuName, type: newMenuType}).then(onCancelClick);
           props.setMenus((await communicator.getAllMenus()).data);
         }
     }
@@ -73,8 +73,8 @@ const MenuModal = (props : props) => {
               <MenuItem value={menuTypeList[1]}>主菜</MenuItem>
               <MenuItem value={menuTypeList[2]}>副菜</MenuItem>
             </Select>
-            {!props.menuId && <Button variant='contained' onClick={onPostSubmitClick}>OK</Button>}
-            {props.menuId && <Button variant='contained' onClick={onPatchSubmitClick}>OK</Button>}
+            {!props.menu && <Button variant='contained' onClick={onPostSubmitClick}>OK</Button>}
+            {props.menu && <Button variant='contained' onClick={onPatchSubmitClick}>OK</Button>}
             <Button variant='contained' onClick={onCancelClick}>キャンセル</Button>
           </Box>
         </Modal>  )

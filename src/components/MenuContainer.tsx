@@ -27,7 +27,7 @@ const MenuContainer = (props: props) => {
       <Grid container direction={'column'}>
         {props.menus.map((menu) => <MenuCard menu={menu} ingredients={props.ingredients} setMenus={props.setMenus}/>)}
       </Grid>
-      <MenuModal setMenus={props.setMenus} open={open} setOpen={setOpen} menuId={null} />
+      <MenuModal setMenus={props.setMenus} open={open} setOpen={setOpen} menu={null} />
     </>
   )
 }
