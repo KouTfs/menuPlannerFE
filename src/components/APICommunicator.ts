@@ -45,17 +45,12 @@ class APICommunicator {
     }
 
     getAllMenus = async (): Promise<AxiosResponse<Menu[]>> => {
-        const URL = this.host + '/menus';
-        return await axios.get(URL, {headers: {Authorization: this.getToken()}});
-    }
-
-    getMenuById = async (id: number): Promise<AxiosResponse<Menu>> => {
-        const URL = this.host + `/menus/${id}`;
+        const URL = this.host + '/menus/' + sessionStorage.getItem('USERNAME');
         return await axios.get(URL, {headers: {Authorization: this.getToken()}});
     }
 
     postMenu = async (menuName: string, menuType: string) => {
-        const URL = this.host + `/menu`;
+        const URL = this.host + `/menu/` + sessionStorage.getItem('USERNAME');
         await axios.post(URL, {menuName: menuName, menuType: menuType}, {headers: {Authorization: this.getToken()}});
     }
 

@@ -9,21 +9,17 @@ export const Login = () => {
     const [password, setPassword] = useState<string>();
     const communicator = new APICommunicator;
 
-    type User = {
-        userName : string,
-        password : string
-    }
-
-    const loginUrl = "http://localhost:5000/login"
-
     const onClickLogin = async () => {
+      if(userName && password){
         communicator.login({
           userName,
           password
        }).then((response)=>{
           sessionStorage.setItem('AUTHORITY', response.data);
+          sessionStorage.setItem('USERNAME', userName);
           navigate('/app')
         }).catch((error) => {navigate("/fail_login")});
+      }
     }
   return (
     <>
