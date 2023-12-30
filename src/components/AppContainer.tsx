@@ -5,7 +5,7 @@ import Menu from './entity/Menu';
 import MenuContainer from './MenuContainer';
 import APICommunicator from './APICommunicator';
 import { CircularProgress } from '@mui/material';
-import IngredientContainer from '../IngredientContainer';
+import IngredientContainer from './IngredientContainer';
 
 export const AppContainer = () => {
   const [ingredients, setIngredients] = React.useState<Ingredient[]>([]);

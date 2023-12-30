@@ -15,7 +15,6 @@ interface props {
 const MenuContainer = (props: props) => {
   const [open, setOpen] = React.useState<boolean>(false);
 
-
   const onCreateClick = () => {
     setOpen(true);
   }
